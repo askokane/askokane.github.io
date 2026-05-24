@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: atharvakokane/atharvakokane.github.io
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: blog
+    label: blog posts
+    folder: content/posts
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: slug, name: slug, widget: string, hint: "url-friendly identifier, becomes filename" }
+      - { label: title, name: title, widget: string }
+      - { label: date, name: date, widget: datetime }
+      - { label: excerpt, name: excerpt, widget: text, required: false }
+      - { label: body, name: body, widget: markdown }
+
+  - name: resume
+    label: resume
+    files:
+      - name: resume
+        label: resume
+        file: content/resume.md
+        fields:
+          - { label: body, name: body, widget: markdown }

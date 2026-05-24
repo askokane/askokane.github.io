@@ -1,0 +1,5 @@
+user-agent: *
+allow: /
+disallow: /admin/
+
+sitemap: https://atharvakokane.github.io/sitemap.xml

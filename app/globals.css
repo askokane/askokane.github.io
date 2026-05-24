@@ -1,0 +1,671 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0C0B0E;
+  --foreground: #C8BFA8;
+  --muted: #998A78;
+  --border: #2A2420;
+  --accent: #C9A84C;
+  --bright: #EDE5D0;
+  --surface: #131117;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero entrance animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/*
+ * Hero entrance classes — animations are PAUSED until BootWrapper adds
+ * .hero-ready to <html>. This way they always play visibly:
+ *   • First visit:  play after the boot screen finishes
+ *   • Return visit: play immediately (no boot screen)
+ *
+ * Per-element delay is supplied via the --hd CSS custom property.
+ */
+.hero-letter { animation: fadeInUp 0.85s cubic-bezier(0.16,1,0.3,1) var(--hd,0s) both; }
+.hero-rise   { animation: fadeInUp 0.8s  ease-out                   var(--hd,0s) both; }
+.hero-fade   { animation: fadeIn   0.8s  ease-out                   var(--hd,0s) both; }
+
+/* Paused by default (overrides the 'running' set by the animation shorthand above) */
+.hero-letter,
+.hero-rise,
+.hero-fade {
+  animation-play-state: paused;
+}
+
+/* Start running once the boot sequence signals readiness */
+.hero-ready .hero-letter,
+.hero-ready .hero-rise,
+.hero-ready .hero-fade {
+  animation-play-state: running;
+}
+
+/* Boot screen cursor blink */
+@keyframes bootCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ScrollReveal keyframe — uses CSS var so distance is configurable */
+@keyframes scrollReveal {
+  from { opacity: 0; transform: translateY(var(--sr-dist, 14px)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Interest collage ────────────────────────────────────────── */
+
+/* Card entrance — staggered scale + fade (delay set inline per card) */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: scale(0.93) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* Background watermark float for the large math card */
+@keyframes mathBg {
+  0%, 100% { transform: translateY(-50%) scale(1)    rotate(0deg);   }
+  33%      { transform: translateY(-52%) scale(1.03) rotate(1.5deg); }
+  66%      { transform: translateY(-48%) scale(0.98) rotate(-1deg);  }
+}
+
+/* Border hover glow */
+.interest-card {
+  transition: border-color 0.4s ease;
+}
+.interest-card:hover {
+  border-color: rgba(201, 168, 76, 0.28);
+}
+
+/* Cursor-following radial shine — uses CSS vars set via JS */
+.interest-shine {
+  background: radial-gradient(
+    circle 200px at var(--mx, 50%) var(--my, 50%),
+    rgba(201, 168, 76, 0.10) 0%,
+    transparent 100%
+  );
+}
+
+/* ── Featured blog card ──────────────────────────────────────── */
+.blog-card-featured {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.6rem 1.75rem;
+  overflow: hidden;
+  transition: border-color 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+
+.blog-card-featured::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent), rgba(201,168,76,0.3), transparent);
+  transition: opacity 0.45s ease;
+}
+
+.blog-card-featured::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 0% 0%, rgba(201,168,76,0.06) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.blog-card-featured:hover {
+  border-color: rgba(201, 168, 76, 0.32);
+  transform: translateY(-2px);
+}
+
+.blog-card-featured:hover::after {
+  opacity: 1;
+}
+
+/* ── Compact blog list row ───────────────────────────────────── */
+.blog-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.blog-row:hover {
+  border-color: rgba(201, 168, 76, 0.25);
+}
+
+.blog-row-index {
+  font-family: var(--font-cinzel, serif);
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  opacity: 0.5;
+  width: 1.4rem;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.blog-row:hover .blog-row-index {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.blog-row-title {
+  font-family: var(--font-cormorant, Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--bright);
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
+  transition: color 0.3s ease;
+}
+
+.blog-row:hover .blog-row-title {
+  color: var(--accent);
+}
+
+.blog-row-meta {
+  font-family: var(--font-cinzel, serif);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.blog-row:hover .blog-row-meta {
+  color: rgba(201, 168, 76, 0.65);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ── syntax highlighting – warm dark override ── */
+.hljs {
+  background: #0F0E11;
+  color: #C8BFA8;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  border-left: 2px solid #C9A84C;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6B6254;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #C9A84C;
+}
+
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
+  color: #A3C2A0;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #B8A9C4;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #C9B48A;
+}
+
+/* ── resume page – interactive components ── */
+
+/* Education / info cards */
+.resume-edu-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.5rem;
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.resume-edu-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Timeline experience list */
+.resume-timeline {
+  position: relative;
+  padding-left: 0;
+}
+.resume-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--border) 60%, transparent);
+}
+.resume-timeline-entry {
+  position: relative;
+  padding-left: 1.75rem;
+  padding-bottom: 2.75rem;
+  transition: padding-left 0.3s ease;
+}
+.resume-timeline-entry:last-child {
+  padding-bottom: 0;
+}
+.resume-timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.resume-timeline-entry:hover::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+/* Project cards */
+.resume-project-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.5rem 1.75rem;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+}
+.resume-project-card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent), rgba(201,168,76,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.resume-project-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35);
+}
+.resume-project-card:hover::before {
+  opacity: 1;
+}
+
+/* Skill / tech chips */
+.resume-skill-chip {
+  display: inline-block;
+  padding: 0.28rem 0.72rem;
+  border: 1px solid rgba(153, 138, 120, 0.35);
+  font-family: var(--font-cinzel, serif);
+  font-size: 0.4rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  cursor: default;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease, transform 0.18s ease;
+}
+.resume-skill-chip:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  color: var(--accent);
+  background: rgba(201, 168, 76, 0.07);
+  transform: translateY(-1px);
+}
+
+/* ── resume page – markdown passthrough (legacy) ── */
+.resume-content {
+  max-width: 42rem;
+  font-family: var(--font-crimson, Georgia, serif);
+}
+
+.resume-content h1 {
+  display: none;
+}
+
+.resume-content h2 {
+  font-family: var(--font-cinzel, serif);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  border: none;
+}
+
+.resume-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.resume-content p {
+  color: var(--foreground);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.resume-content p + p {
+  margin-top: 0.5rem;
+}
+
+.resume-content ul {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+}
+
+.resume-content li {
+  color: var(--foreground);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.resume-content li:last-child {
+  margin-bottom: 0;
+}
+
+.resume-content strong {
+  color: var(--bright);
+  font-weight: 600;
+}
+
+.resume-content a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.resume-content a:hover {
+  color: var(--accent);
+}
+
+.resume-content ul + p {
+  margin-top: 2.5rem;
+}
+
+.resume-content p + ul {
+  margin-top: 0.75rem;
+}
+
+.resume-content h2 + p {
+  margin-top: 0.5rem;
+}
+
+.resume-content h2 + p + p {
+  margin-top: 0.25rem;
+}
+
+/* ── blog post content ── */
+.blog-post-content {
+  font-family: var(--font-crimson, Georgia, serif);
+  font-size: 1.125rem;
+  line-height: 1.85;
+}
+
+.blog-post-content p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--foreground);
+  line-height: 1.85;
+}
+
+.blog-post-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* drop cap on opening paragraph */
+.blog-post-content > p:first-child::first-letter {
+  font-family: var(--font-cormorant, Georgia, serif);
+  font-size: 3.6em;
+  font-weight: 500;
+  line-height: 0.82;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--accent);
+}
+
+.blog-post-content h2,
+.blog-post-content h3 {
+  font-family: var(--font-cormorant, Georgia, serif);
+  color: var(--bright);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.blog-post-content h2 {
+  font-size: 1.8rem;
+}
+
+.blog-post-content h3 {
+  font-size: 1.4rem;
+}
+
+.blog-post-content h2:first-child,
+.blog-post-content h3:first-child {
+  margin-top: 0;
+}
+
+.blog-post-content a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.blog-post-content a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.blog-post-content code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.875em;
+  color: var(--foreground);
+  background: var(--surface);
+  padding: 0.15em 0.4em;
+  border-radius: 2px;
+}
+
+.blog-post-content pre {
+  background: #0F0E11;
+  border: 1px solid var(--border);
+  margin-top: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-radius: 0;
+}
+
+.blog-post-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.blog-post-content ul {
+  list-style-type: disc;
+}
+
+.blog-post-content ol {
+  list-style-type: decimal;
+}
+
+.blog-post-content li {
+  color: var(--foreground);
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-content li:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-content ul ul,
+.blog-post-content ol ol,
+.blog-post-content ul ol,
+.blog-post-content ol ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.blog-post-content ul ul {
+  list-style-type: circle;
+}
+
+.blog-post-content ul ul ul {
+  list-style-type: square;
+}
+
+.blog-post-content ol ol {
+  list-style-type: lower-alpha;
+}
+
+/* KaTeX math – warm dark theme */
+.blog-post-content .katex {
+  font-size: 1.05em;
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+
+.blog-post-content .katex:hover {
+  color: var(--bright);
+}
+
+.blog-post-content .katex-display {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--bright);
+  overflow-x: auto;
+}
+
+/* ── contact page cards ── */
+.contact-card {
+  position: relative;
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.4rem 1.6rem;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent), rgba(201,168,76,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.contact-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 0% 0%, rgba(201,168,76,0.07), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.contact-card:hover {
+  border-color: rgba(201,168,76,0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+}
+.contact-card:hover::before,
+.contact-card:hover::after {
+  opacity: 1;
+}
+
+/* ── blog post prev/next nav ── */
+.blog-post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+}
+.blog-post-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.blog-post-nav-link:last-child {
+  text-align: right;
+  align-items: flex-end;
+}
+.blog-post-nav-link:hover .blog-post-nav-title {
+  color: var(--accent);
+}
+.blog-post-nav-direction {
+  font-family: var(--font-cinzel, serif);
+  font-size: 0.44rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.blog-post-nav-title {
+  font-family: var(--font-cormorant, Georgia, serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--bright);
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
