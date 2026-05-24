@@ -1,7 +1,7 @@
 const LINKS = [
   { label: 'email',    href: 'mailto:atharvashashankk@vt.edu',             external: false },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/atharvakokane/', external: true  },
-  { label: 'github',   href: 'https://github.com/atharvakokane',           external: true  },
+  { label: 'github',   href: 'https://github.com/askokane',                external: true  },
 ];
 
 export function Footer() {

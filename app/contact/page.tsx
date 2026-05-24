@@ -28,8 +28,8 @@ const LINKS = [
   },
   {
     label:   'github',
-    display: 'github.com/atharvakokane',
-    href:    'https://github.com/atharvakokane',
+    display: 'github.com/askokane',
+    href:    'https://github.com/askokane',
     desc:    'code and projects',
     external: true,
   },
