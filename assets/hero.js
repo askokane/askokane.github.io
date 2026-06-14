@@ -16,7 +16,7 @@ if (mount) {
   const isMobile = window.innerWidth < 768;
 
   const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true, preserveDrawingBuffer: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
   renderer.setSize(W(), H());
   renderer.setClearColor(0x000000, 0);
   mount.appendChild(renderer.domElement);
@@ -31,7 +31,7 @@ if (mount) {
   const RADIUS = 9;
 
   // ── morphing wireframe icosahedron ──
-  const geo = new THREE.IcosahedronGeometry(RADIUS, 5);
+  const geo = new THREE.IcosahedronGeometry(RADIUS, isMobile ? 3 : 5);
   const posAttr = geo.attributes.position;
   const count = posAttr.count;
   const base = new Float32Array(posAttr.array);          // pristine copy

@@ -6,6 +6,8 @@
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  var isSmall = window.innerWidth < 768;
   var gsap = window.gsap;
   var ScrollTrigger = window.ScrollTrigger;
   if (gsap && ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
@@ -21,7 +23,7 @@
   /* ── Lenis smooth scroll ─────────────────────────────────── */
   var lenis = null;
   function initLenis() {
-    if (reduced || !window.Lenis) return;
+    if (reduced || isCoarse || !window.Lenis) return;
     lenis = new window.Lenis({
       duration: 1.05,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
@@ -162,7 +164,7 @@
     if (reduced || !gsap || !ScrollTrigger) { window.__heroProgress = 0; return; }
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: hero, start: 'top top', end: '+=145%',
+        trigger: hero, start: 'top top', end: isSmall ? '+=70%' : '+=145%',
         scrub: 0.5, pin: true, anticipatePin: 1,
         onUpdate: function (self) { window.__heroProgress = self.progress; }
       }
@@ -185,7 +187,7 @@
       opacity: 1, ease: 'none', stagger: 0.4,
       scrollTrigger: {
         trigger: m.closest('.manifesto') || m,
-        start: 'top top', end: '+=130%', scrub: true, pin: true, anticipatePin: 1
+        start: 'top top', end: isSmall ? '+=60%' : '+=130%', scrub: true, pin: true, anticipatePin: 1
       }
     });
   }
