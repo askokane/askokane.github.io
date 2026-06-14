@@ -231,6 +231,47 @@
       stagger: { each: 0.025, from: 'random' },
       scrollTrigger: { trigger: '.stack-cloud', start: 'top 88%' }
     });
+
+    if (isCoarse) return;
+    var SCRAMBLE = 'abcdefghijklmnopqrstuvwxyz0123456789#$%&*+';
+    chips.forEach(function (c) {
+      c.dataset.label = c.textContent;
+      c.addEventListener('pointerenter', function (e) {
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+
+        var label = c.dataset.label;
+        if (c._scramble) c._scramble.kill();
+        c._scramble = gsap.to({}, {
+          duration: 0.45, ease: 'none',
+          onUpdate: function () {
+            var reveal = Math.floor(this.progress() * label.length);
+            var out = '';
+            for (var i = 0; i < label.length; i++) {
+              out += (i < reveal || label[i] === ' ') ? label[i] : SCRAMBLE[Math.floor(Math.random() * SCRAMBLE.length)];
+            }
+            c.textContent = out;
+          },
+          onComplete: function () { c.textContent = label; }
+        });
+
+        gsap.timeline()
+          .to(c, { scale: 1.16, rotate: gsap.utils.random(-6, 6), duration: 0.18, ease: 'power2.out' })
+          .to(c, { scale: 1, rotate: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+      });
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        var dx = (e.clientX - r.left) / r.width - 0.5;
+        var dy = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(c, { x: dx * 10, y: dy * 8, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
+      });
+      c.addEventListener('pointerleave', function () {
+        gsap.to(c, { x: 0, y: 0, rotate: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+      });
+    });
   }
 
   /* ── resume timeline draw ────────────────────────────────── */

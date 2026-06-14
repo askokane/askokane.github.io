@@ -513,7 +513,20 @@ body::after {
 .chip:hover { border-color: rgba(var(--ink-rgb),0.5); color: var(--bright); }
 
 .stack-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.stack-cloud .chip { font-size: 0.74rem; padding: 0.5rem 1.05rem; cursor: default; }
+.stack-cloud .chip {
+  position: relative; font-size: 0.74rem; padding: 0.5rem 1.05rem; cursor: default;
+  overflow: hidden; will-change: transform; isolation: isolate;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.stack-cloud .chip::before {
+  content: '';
+  position: absolute; inset: -1px;
+  background: radial-gradient(circle 60px at var(--mx, 50%) var(--my, 50%), #fff, transparent 70%);
+  opacity: 0; transition: opacity 0.3s var(--ease);
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+.stack-cloud .chip:hover::before { opacity: 0.5; }
 .stack-cloud .chip:hover { background: var(--bright); color: var(--bg); border-color: var(--bright); }
 
 .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
