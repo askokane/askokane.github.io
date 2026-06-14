@@ -236,11 +236,7 @@
     var SCRAMBLE = 'abcdefghijklmnopqrstuvwxyz0123456789#$%&*+';
     chips.forEach(function (c) {
       c.dataset.label = c.textContent;
-      c.addEventListener('pointerenter', function (e) {
-        var r = c.getBoundingClientRect();
-        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
-
+      c.addEventListener('pointerenter', function () {
         var label = c.dataset.label;
         if (c._scramble) c._scramble.kill();
         c._scramble = gsap.to({}, {
@@ -262,8 +258,6 @@
       });
       c.addEventListener('pointermove', function (e) {
         var r = c.getBoundingClientRect();
-        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
         var dx = (e.clientX - r.left) / r.width - 0.5;
         var dy = (e.clientY - r.top) / r.height - 0.5;
         gsap.to(c, { x: dx * 10, y: dy * 8, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
