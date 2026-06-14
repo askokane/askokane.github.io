@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>atharva kokane</title>
+<meta name="description" content="personal site and portfolio of atharva kokane — cs @ virginia tech." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');}catch(e){}</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script defer src="assets/site.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+
+<!-- ── preloader ──────────────────────────────────────────── -->
+<div id="preloader">
+  <div class="pl-top">
+    <span class="mono-tag">// atharva kokane — system boot</span>
+    <span class="mono-tag">rev 2.0</span>
+  </div>
+  <div class="pl-mid">
+    <span class="pl-count"><span class="pl-num">000</span><span class="pct">%</span></span>
+  </div>
+  <div class="pl-bottom">
+    <div class="pl-status">&gt; <b>initialising runtime</b></div>
+    <div class="pl-bar"><i></i></div>
+  </div>
+</div>
+<div class="pl-curtain" style="left:0;width:34%"></div>
+<div class="pl-curtain" style="left:33%;width:34%"></div>
+<div class="pl-curtain" style="left:66%;width:34%"></div>
+
+<!-- ── header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="nav-brand" href="index.html">// a.kokane <span class="rev">rev 2.0</span></a>
+    <nav class="nav-links">
+      <span class="nav-indicator"></span>
+      <a href="index.html" class="active">home</a>
+      <a href="blog.html">writing</a>
+      <a href="resume.html">resume</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+  <div class="nav-progress"><i></i></div>
+</header>
+
+<main>
+
+<!-- ── hero ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div id="hero-canvas"></div>
+  <div class="hero-fade-l"></div>
+  <div class="hero-fade-v"></div>
+  <span class="reg tl"></span><span class="reg tr"></span>
+  <span class="reg bl"></span><span class="reg br"></span>
+
+  <div class="hero-inner">
+    <div class="wrap">
+      <div class="hero-id" data-hero-in><span class="dot"></span> unit / a.kokane — rev 2.0</div>
+
+      <h1 class="hero-name" aria-label="atharva kokane">
+        <span class="ln"><span class="ch">a</span><span class="ch">t</span><span class="ch">h</span><span class="ch">a</span><span class="ch">r</span><span class="ch">v</span><span class="ch">a</span></span>
+        <span class="ln"><span class="ch">k</span><span class="ch">o</span><span class="ch">k</span><span class="ch">a</span><span class="ch">n</span><span class="ch">e</span><span class="ch">.</span></span>
+      </h1>
+
+      <p class="hero-bio" data-hero-in>
+        <span class="lead">[ cs sophomore · virginia tech ]</span>
+        i write about code, projects, and things i find interesting.
+      </p>
+
+      <a class="hero-cue" href="#interests" data-hero-in>
+        <span class="arrow">↓</span> scroll
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── interests ──────────────────────────────────────────── -->
+<section class="manifesto">
+  <div class="wrap">
+    <div class="tag" data-reveal="fade">// 01 — index</div>
+    <p class="manifesto-text">i'm a cs sophomore at virginia tech who builds tools, writes essays, and gets obsessed with problems.</p>
+  </div>
+</section>
+
+<section class="wrap" id="interests" style="padding-top:clamp(4rem,11vh,7.5rem);padding-bottom:2rem;">
+  <div class="seclabel" data-reveal="fade">
+    <span><b>[ </b>02 / interests<b> ]</b></span>
+    <span class="line" data-draw></span>
+  </div>
+
+  <div class="collage">
+    <div class="icard large" data-reveal="up" data-tilt data-shine>
+      <span class="watermark" data-parallax="34">∑</span>
+      <span class="shine"></span><span class="topedge"></span>
+      <div class="icard-inner">
+        <div>
+          <span class="sym">∫</span>
+          <span class="subsym">∑ &nbsp; ∂ &nbsp; ∇ &nbsp; ∞</span>
+        </div>
+        <div>
+          <h3>mathematics</h3>
+          <p>analysis · topology · abstraction</p>
+        </div>
+      </div>
+    </div>
+
+    <a class="icard" href="https://www.goodreads.com/user/show/154124312-atharva-kokane" target="_blank" rel="noopener noreferrer" data-reveal="up" data-delay="0.05" data-tilt data-shine>
+      <span class="shine"></span><span class="topedge"></span><span class="ext">↗</span>
+      <div class="icard-inner">
+        <span class="sym">§</span>
+        <div><h3>literature</h3><p>fiction · poetry · criticism</p></div>
+      </div>
+    </a>
+
+    <div class="icard" data-reveal="up" data-delay="0.1" data-tilt data-shine>
+      <span class="shine"></span><span class="topedge"></span>
+      <div class="icard-inner">
+        <span class="sym">λ</span>
+        <div><h3>computer science</h3><p>algorithms · systems · theory</p></div>
+      </div>
+    </div>
+
+    <a class="icard" href="https://letterboxd.com/Atharva_kokane/" target="_blank" rel="noopener noreferrer" data-reveal="up" data-delay="0.15" data-tilt data-shine>
+      <span class="shine"></span><span class="topedge"></span><span class="ext">↗</span>
+      <div class="icard-inner">
+        <span class="sym">▷</span>
+        <div><h3>cinema</h3><p>film theory · visual stories</p></div>
+      </div>
+    </a>
+
+    <a class="icard" href="https://open.spotify.com/user/31fx6hhsizbggjfkbw4y4oyfpeqa" target="_blank" rel="noopener noreferrer" data-reveal="up" data-delay="0.2" data-tilt data-shine>
+      <span class="shine"></span><span class="topedge"></span><span class="ext">↗</span>
+      <div class="icard-inner">
+        <span class="sym">♩</span>
+        <div><h3>music</h3><p>classical · jazz · ambient</p></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── recent writing ─────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="item fill">pressure is not a struggle</span><span class="star">✾</span><span class="item">but a privilege</span><span class="star">✾</span><span class="item fill">pressure is not a struggle</span><span class="star">✾</span><span class="item">but a privilege</span><span class="star">✾</span><span class="item fill">pressure is not a struggle</span><span class="star">✾</span><span class="item">but a privilege</span><span class="star">✾</span><span class="item fill">pressure is not a struggle</span><span class="star">✾</span><span class="item">but a privilege</span><span class="star">✾</span>
+  </div>
+</div>
+
+<section class="wrap" style="padding-top:clamp(3.5rem,9vh,6rem);padding-bottom:3rem;">
+  <div class="seclabel" data-reveal="fade">
+    <span><b>[ </b>03 / writing<b> ]</b></span>
+    <span class="line" data-draw></span>
+  </div>
+
+  <!-- BUILD:FEATURED:START -->
+  <a class="featured" href="posts/domain.html" data-reveal="up">
+    <span class="kicker">// latest</span>
+    <h3>domain</h3>
+    <p>finally back</p>
+    <div class="meta">
+      <span>2026.06.06 · 1 min</span>
+      <span class="read">read →</span>
+    </div>
+  </a>
+  <!-- BUILD:FEATURED:END -->
+
+  <!-- BUILD:RECENT:START -->
+  <div class="rows">
+    <div class="row" data-reveal="line">
+      <span class="idx">02</span>
+      <span class="ttl">portsmith <em>— cli tool for ports</em></span>
+      <span class="mt">1 min</span>
+    </div>
+    <div class="row" data-reveal="line">
+      <span class="idx">03</span>
+      <span class="ttl">shared governance <em>— a new project for the uss</em></span>
+      <span class="mt">2 min</span>
+    </div>
+    <div class="row" data-reveal="line">
+      <span class="idx">04</span>
+      <span class="ttl">writer's block <em>— a literature project?</em></span>
+      <span class="mt">1 min</span>
+    </div>
+  </div>
+  <!-- BUILD:RECENT:END -->
+
+  <a class="viewall" href="blog.html" data-reveal="fade" data-magnet>view all writing →</a>
+</section>
+
+<!-- ── stack ──────────────────────────────────────────────── -->
+<section class="wrap" style="padding-top:clamp(3.5rem,9vh,6rem);padding-bottom:clamp(2rem,6vh,4rem);">
+  <div class="seclabel" data-reveal="fade">
+    <span><b>[ </b>04 / stack<b> ]</b></span>
+    <span class="line" data-draw></span>
+  </div>
+
+  <div class="stack-cloud">
+    <span class="chip" data-stack>python</span>
+    <span class="chip" data-stack>java</span>
+    <span class="chip" data-stack>sql</span>
+    <span class="chip" data-stack>html</span>
+    <span class="chip" data-stack>css</span>
+    <span class="chip" data-stack>typescript</span>
+    <span class="chip" data-stack>numpy</span>
+    <span class="chip" data-stack>pandas</span>
+    <span class="chip" data-stack>scikit-learn</span>
+    <span class="chip" data-stack>react</span>
+    <span class="chip" data-stack>node.js</span>
+    <span class="chip" data-stack>matplotlib</span>
+    <span class="chip" data-stack>github</span>
+    <span class="chip" data-stack>arduino</span>
+    <span class="chip" data-stack>vs code</span>
+    <span class="chip" data-stack>latex</span>
+    <span class="chip" data-stack>mysql</span>
+    <span class="chip" data-stack>linux</span>
+    <span class="chip" data-stack>ms office</span>
+    <span class="chip" data-stack>fusion 360</span>
+    <span class="chip" data-stack>ansys cfd</span>
+    <span class="chip" data-stack>tinkercad</span>
+    <span class="chip" data-stack>fl studio</span>
+    <span class="chip" data-stack>ni komplete</span>
+    <span class="chip" data-stack>vst / vst3</span>
+  </div>
+</section>
+
+<section class="outro wrap">
+  <div class="tag" data-reveal="fade">// end of line</div>
+  <h2 data-reveal="up">let's<br>talk.</h2>
+  <a class="cta" href="contact.html" data-magnet data-reveal="up">get in touch <span>→</span></a>
+  <div class="alt" data-reveal="fade">or email <a href="mailto:atharvashashankk@vt.edu">atharvashashankk@vt.edu</a></div>
+</section>
+
+</main>
+
+<!-- ── footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-id">
+        <div class="accent-bar"></div>
+        <p class="foot-tagline">cs sophomore building tools &amp; writing about ideas at virginia tech.</p>
+        <div class="foot-status"><span class="live"></span> online from blacksburg, va</div>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// index</div>
+        <a href="index.html">home</a>
+        <a href="blog.html">writing</a>
+        <a href="resume.html">resume</a>
+        <a href="contact.html">contact</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// channels</div>
+        <a href="mailto:atharvashashankk@vt.edu">email</a>
+        <a href="https://www.linkedin.com/in/atharvakokane/" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="https://github.com/askokane" target="_blank" rel="noopener noreferrer">github ↗</a>
+      </div>
+      <div class="foot-col foot-actions">
+        <div class="foot-h">// nav</div>
+        <button class="foot-top" type="button" data-top><span>back to top</span><span class="ar">↑</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="foot-signoff">
+    <div class="foot-bignote">// you know what to do</div>
+    <div class="foot-bigname" aria-hidden="true"><span>ask.</span></div>
+  </div>
+  <div class="wrap">
+    <div class="foot-base">
+      <span>© <span data-year></span> atharva kokane — all rights reserved</span>
+      <span>// rebuilt with gsap · three.js</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/hero.js"></script>
+</body>
+</html>

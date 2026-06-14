@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>mahler measure — atharva kokane</title>
+<meta name="description" content="2025.08.29 · 1 min read" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');}catch(e){}</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="nav-brand" href="../index.html">// a.kokane <span class="rev">rev 2.0</span></a>
+    <nav class="nav-links">
+      <span class="nav-indicator"></span>
+      <a href="../index.html">home</a>
+      <a href="../blog.html" class="active">writing</a>
+      <a href="../resume.html">resume</a>
+      <a href="../contact.html">contact</a>
+    </nav>
+  </div>
+  <div class="nav-progress"><i></i></div>
+</header>
+
+<main class="wrap page">
+  <article class="post">
+    <header class="post-head">
+      <a class="back" href="../blog.html">← writing</a>
+      <h1 data-split="words">mahler measure</h1>
+      <div class="meta" data-reveal="fade" data-delay="0.25">2025.08.29 · 1 min read</div>
+    </header>
+    <div class="post-body" data-reveal="up" data-delay="0.15">
+      <p>it isn't even a week into university and i already have a math equation to understand. i have a math class with prof. arunabha biswas and i checked out his work on the zeta mahler measure. now he is working on the closed formula for the measure. i really want to work with him on that publication, but he told me that the percentage of solving it is really really low. i really want to atleast understand the measure atleast though. so then we begin. the formula to understand is below.</p>
+      <p class="math-block">$$M(p) = |a| \prod_{|\alpha_i| \geq 1} |\alpha_i| = |a| \prod_{i=1}^n \max(1, |\alpha_i|)$$</p>
+      <p>where $p(z)$ factorizes over the complex numbers $\mathbb{C}$ as:</p>
+      <p class="math-block">$$p(z) = a(z - \alpha_1)(z - \alpha_2)...(z - \alpha_n)$$</p>
+      <p>the place to start apparently is complex analysis. so, time for some revision i guess. i will start with some youtube lectures. i need to buy notebooks for this. 3 notebooks it is, for my chemistry, math and this stuff. i really hope this leads somewhere.</p>
+      <p class="post-sig">ask.</p>
+    </div>
+  </article>
+
+  <nav class="post-nav">
+    <a href="the-money-problem.html"><span class="dir">← the money problem</span><span class="pt">previous</span></a>
+    <a href="../contact.html"><span class="dir">say hi →</span><span class="pt">get in touch</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-id">
+        <div class="accent-bar"></div>
+        <p class="foot-tagline">cs sophomore building tools &amp; writing about ideas at virginia tech.</p>
+        <div class="foot-status"><span class="live"></span> online from blacksburg, va</div>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// index</div>
+        <a href="../index.html">home</a>
+        <a href="../blog.html">writing</a>
+        <a href="../resume.html">resume</a>
+        <a href="../contact.html">contact</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// channels</div>
+        <a href="mailto:atharvashashankk@vt.edu">email</a>
+        <a href="https://www.linkedin.com/in/atharvakokane/" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="https://github.com/askokane" target="_blank" rel="noopener noreferrer">github ↗</a>
+      </div>
+      <div class="foot-col foot-actions">
+        <div class="foot-h">// nav</div>
+        <button class="foot-top" type="button" data-top><span>back to top</span><span class="ar">↑</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="foot-signoff">
+    <div class="foot-bignote">// you know what to do</div>
+    <div class="foot-bigname" aria-hidden="true"><span>ask.</span></div>
+  </div>
+  <div class="wrap">
+    <div class="foot-base">
+      <span>© <span data-year></span> atharva kokane — all rights reserved</span>
+      <span>// rebuilt with gsap · three.js</span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.querySelector('.post-body'), {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+    });
+  }
+  if (window.hljs) hljs.highlightAll();
+});
+</script>
+</body>
+</html>

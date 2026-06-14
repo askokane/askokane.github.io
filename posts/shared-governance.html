@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>shared governance — atharva kokane</title>
+<meta name="description" content="2026.03.15 · 2 min read" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');}catch(e){}</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="nav-brand" href="../index.html">// a.kokane <span class="rev">rev 2.0</span></a>
+    <nav class="nav-links">
+      <span class="nav-indicator"></span>
+      <a href="../index.html">home</a>
+      <a href="../blog.html" class="active">writing</a>
+      <a href="../resume.html">resume</a>
+      <a href="../contact.html">contact</a>
+    </nav>
+  </div>
+  <div class="nav-progress"><i></i></div>
+</header>
+
+<main class="wrap page">
+  <article class="post">
+    <header class="post-head">
+      <a class="back" href="../blog.html">← writing</a>
+      <h1 data-split="words">shared governance</h1>
+      <div class="meta" data-reveal="fade" data-delay="0.25">2026.03.15 · 2 min read</div>
+    </header>
+    <div class="post-body" data-reveal="up" data-delay="0.15">
+      <p>so i got elected as the interim vice president for shared governance at the undergraduate student senate. i really am hoping to do some good work with the current cabinet, before everyone leaves for their own lives. so, i thought when i was a senator for the uss, i really hated the shared governance tracker that we had in place. so i thought to build a new one.</p>
+      <p>so i booted cursor up, started up a new github repo and just start prompting some random thoughts. i started with a database for all the accounts, meetings and dates. i then made an admin control center that we as the cabinet can use to keep track of who has gone to which meeting. i then made an adjustment to senator side where they could check off if they had attended a shared governance meeting, and also added a section for notes for the meeting.</p>
+      <p>i then showed it to the president and she suggested a calendar. then it hit me. yes, of course. how could i be so dumb. i immediately added a calendar and then added the meetings to the calendar as reminders. when a senator or cabinet member would click on the reminder, they would be redirected to the governance page of that particular commission or committee. i think i have progressed it well for now, but a lot more work to do.</p>
+      <p>i think we can start brute testing it, so i will suggest it at the next cabinet meeting. also showed it to another vice president. he loved it, and if he loved it, thats a great sign. hopefully this works out. i will keep you updated.</p>
+      <p>so, i realized that my stupid ass did not add a database to store the responses from senators, and i expected for the responses to be saved to every computer by just a local storage system. i really can be shallow sometimes. after my realization, i connected the js file that i had to a firebase api and firestore database to store the responses and reflect the same on the website accordingly.</p>
+      <p>hopefully there are not anymore stupid mistakes that i made.</p>
+      <p class="post-sig">ask.</p>
+    </div>
+  </article>
+
+  <nav class="post-nav">
+    <a href="portsmith.html"><span class="dir">← portsmith</span><span class="pt">previous</span></a>
+    <a href="writers-block.html"><span class="dir">writer's block →</span><span class="pt">next</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-id">
+        <div class="accent-bar"></div>
+        <p class="foot-tagline">cs sophomore building tools &amp; writing about ideas at virginia tech.</p>
+        <div class="foot-status"><span class="live"></span> online from blacksburg, va</div>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// index</div>
+        <a href="../index.html">home</a>
+        <a href="../blog.html">writing</a>
+        <a href="../resume.html">resume</a>
+        <a href="../contact.html">contact</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">// channels</div>
+        <a href="mailto:atharvashashankk@vt.edu">email</a>
+        <a href="https://www.linkedin.com/in/atharvakokane/" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="https://github.com/askokane" target="_blank" rel="noopener noreferrer">github ↗</a>
+      </div>
+      <div class="foot-col foot-actions">
+        <div class="foot-h">// nav</div>
+        <button class="foot-top" type="button" data-top><span>back to top</span><span class="ar">↑</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="foot-signoff">
+    <div class="foot-bignote">// you know what to do</div>
+    <div class="foot-bigname" aria-hidden="true"><span>ask.</span></div>
+  </div>
+  <div class="wrap">
+    <div class="foot-base">
+      <span>© <span data-year></span> atharva kokane — all rights reserved</span>
+      <span>// rebuilt with gsap · three.js</span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.querySelector('.post-body'), {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+    });
+  }
+  if (window.hljs) hljs.highlightAll();
+});
+</script>
+</body>
+</html>
