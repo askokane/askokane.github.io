@@ -22,6 +22,7 @@
 
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --display: 'Archivo Black', 'Arial Black', sans-serif;
+  --body: 'Space Grotesk', 'Arial', sans-serif;
 
   --gut: clamp(1.25rem, 5vw, 3rem);
   --maxw: 760px;
@@ -64,7 +65,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--mono);
+  font-family: var(--body);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
@@ -565,13 +566,7 @@ body::after {
 }
 .status-strip .item { display: flex; align-items: center; gap: 0.6rem; }
 .status-strip b { color: var(--bright); font-weight: 400; font-variant-numeric: tabular-nums; }
-.status-strip .live { width: 6px; height: 6px; background: var(--bright); display: inline-block; animation: blink 1.6s steps(1) infinite; }
-.signal { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
-.signal i { width: 3px; background: var(--bright); display: block; animation: sig 1.1s var(--ease) infinite; }
-.signal i:nth-child(1) { height: 30%; animation-delay: 0s; }
-.signal i:nth-child(2) { height: 60%; animation-delay: 0.12s; }
-.signal i:nth-child(3) { height: 100%; animation-delay: 0.24s; }
-@keyframes sig { 0%, 100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+.status-strip .muted-unit { color: var(--muted); }
 
 .channels { border-top: 1px solid var(--border); }
 .channel {
