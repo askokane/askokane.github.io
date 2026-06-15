@@ -51,6 +51,12 @@ html.light body::after { mix-blend-mode: multiply; opacity: 0.45; }
   border-radius: 0 !important;
 }
 
+/* force text-style glyphs for arrows/symbols — prevents iOS/Android from
+   substituting colorful emoji presentations for ↗ ↑ → ← ↓ etc. */
+.arrow, .hero-cue .arrow, .row .mt, .nav-brand, .foot-top .ar {
+  font-variant-emoji: text;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

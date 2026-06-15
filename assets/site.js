@@ -421,14 +421,14 @@
     var go = function (u) { return function () { location.href = u; }; };
     var ext = function (u) { return function () { window.open(u, '_blank', 'noopener'); }; };
     var cmds = [
-      { ic: '→', lb: 'home', hk: 'g h', run: go(P + 'index.html') },
-      { ic: '→', lb: 'writing', hk: 'g w', run: go(P + 'blog.html') },
-      { ic: '→', lb: 'resume', hk: 'g r', run: go(P + 'resume.html') },
-      { ic: '→', lb: 'contact', hk: 'g c', run: go(P + 'contact.html') },
+      { ic: '→︎', lb: 'home', hk: 'g h', run: go(P + 'index.html') },
+      { ic: '→︎', lb: 'writing', hk: 'g w', run: go(P + 'blog.html') },
+      { ic: '→︎', lb: 'resume', hk: 'g r', run: go(P + 'resume.html') },
+      { ic: '→︎', lb: 'contact', hk: 'g c', run: go(P + 'contact.html') },
       { ic: '@', lb: 'email — atharvashashankk@vt.edu', hk: '', run: go('mailto:atharvashashankk@vt.edu') },
-      { ic: '↗', lb: 'github', hk: '', run: ext('https://github.com/askokane') },
-      { ic: '↗', lb: 'linkedin', hk: '', run: ext('https://www.linkedin.com/in/atharvakokane/') },
-      { ic: '↑', lb: 'back to top', hk: '', run: function () { if (lenis) lenis.scrollTo(0, { duration: 1.2 }); else window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+      { ic: '↗︎', lb: 'github', hk: '', run: ext('https://github.com/askokane') },
+      { ic: '↗︎', lb: 'linkedin', hk: '', run: ext('https://www.linkedin.com/in/atharvakokane/') },
+      { ic: '↑︎', lb: 'back to top', hk: '', run: function () { if (lenis) lenis.scrollTo(0, { duration: 1.2 }); else window.scrollTo({ top: 0, behavior: 'smooth' }); } },
       { ic: '◐', lb: 'theme — toggle light / dark', hk: '', run: function () {
           document.documentElement.classList.toggle('light');
           try { localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark'); } catch (e) {}
@@ -451,7 +451,7 @@
       '<div class="cmdk" role="dialog" aria-label="command menu">' +
         '<div class="cmdk-in"><span class="pr">&gt;</span><input type="text" placeholder="type a command — or just ask." aria-label="command input" /></div>' +
         '<div class="cmdk-list" data-lenis-prevent></div>' +
-        '<div class="cmdk-foot"><span><b>↑↓</b> move</span><span><b>↵</b> run</span><span><b>esc</b> close</span></div>' +
+        '<div class="cmdk-foot"><span><b>↑︎↓︎</b> move</span><span><b>↵</b> run</span><span><b>esc</b> close</span></div>' +
       '</div>';
     document.body.appendChild(ov);
     var input = ov.querySelector('input');

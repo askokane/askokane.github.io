@@ -167,7 +167,7 @@ if (mount) {
       targetProgress = window.__heroProgress || 0;
       progress += (targetProgress - progress) * 0.06;
 
-      const amp = 0.55 + progress * 3.0;     // calm → spiky as you scroll
+      const amp = 0.55 + progress * 3.0;     // calm →︎ spiky as you scroll
       displace(t, amp * intro + 0.15);
 
       group.rotation.y = t * 0.12 + progress * 0.6;
