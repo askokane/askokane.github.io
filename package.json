@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   }
 }

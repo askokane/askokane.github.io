@@ -724,6 +724,47 @@ body::after {
 .post-head .back:hover { color: var(--bright); gap: 0.85rem; }
 .post-head h1 { font-family: var(--display); font-size: clamp(2rem, 7vw, 3.4rem); line-height: 0.92; letter-spacing: -0.03em; color: var(--bright); margin: 0; }
 .post-head .meta { font-size: 0.7rem; letter-spacing: 0.04em; color: var(--muted); margin-top: 1.3rem; }
+
+/* ── shareable postcard module (end of post) ── */
+.post-share { margin: 4rem 0 0; }
+.post-share-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+.post-share-card {
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.3s var(--ease);
+}
+.post-share-card img { width: 100%; height: auto; aspect-ratio: 1080 / 1350; }
+.post-share-card:hover { border-color: var(--border-2); }
+
+.post-share-side { display: flex; flex-direction: column; align-items: flex-start; padding-bottom: 0.4rem; }
+.post-share-note {
+  font-size: 0.86rem; line-height: 1.7; color: var(--muted);
+  margin: 0 0 1.4rem; max-width: 26ch;
+}
+.post-share-dl {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  border: 1px solid var(--border-2); padding: 0.8rem 1.2rem;
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.03em; color: var(--bright);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease), gap 0.3s var(--ease);
+}
+.post-share-dl:hover { background: var(--bright); color: var(--bg); border-color: var(--bright); gap: 1rem; }
+.post-share-spec {
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em;
+  color: var(--faint); margin-top: 1rem;
+}
+
+@media (max-width: 620px) {
+  .post-share-grid { grid-template-columns: 1fr; gap: 1.4rem; justify-items: center; text-align: center; }
+  .post-share-card { max-width: 300px; }
+  .post-share-side { align-items: center; }
+  .post-share-note { max-width: 34ch; }
+}
 .post-body { font-size: 0.92rem; line-height: 1.95; color: var(--fg); }
 .post-body p { margin: 0 0 1.6rem; }
 .post-body strong { color: var(--bright); font-weight: 700; }

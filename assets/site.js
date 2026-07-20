@@ -415,6 +415,68 @@
     });
   }
 
+  /* ── postcard share (Web Share API, file + link) ─────────── */
+  function initShare() {
+    var btns = document.querySelectorAll('[data-share]');
+    if (!btns.length) return;
+
+    btns.forEach(function (btn) {
+      var imgUrl = btn.getAttribute('data-share-img') || btn.getAttribute('href');
+      var fileCache = null, fetching = null;
+
+      /* fetch the png into a File up front so navigator.share() can be called
+         synchronously in the click gesture — iOS Safari drops the user
+         activation if an async fetch sits between the tap and share() */
+      function prefetch() {
+        if (fileCache) return Promise.resolve(fileCache);
+        if (fetching) return fetching;
+        fetching = fetch(imgUrl)
+          .then(function (r) { return r.ok ? r.blob() : Promise.reject(); })
+          .then(function (blob) {
+            fileCache = new File([blob], (btn.getAttribute('data-share-file') || 'postcard') + '.png', { type: 'image/png' });
+            return fileCache;
+          })
+          .catch(function () { fetching = null; return null; });
+        return fetching;
+      }
+
+      /* no Web Share support (e.g. desktop Firefox) → leave the anchor as a
+         plain download, which the markup already provides */
+      if (!navigator.share) return;
+
+      prefetch();
+      ['pointerenter', 'touchstart', 'focus'].forEach(function (ev) {
+        btn.addEventListener(ev, prefetch, { passive: true });
+      });
+
+      /* upgrade the label from "download image ↓" to "share ↗" */
+      var label = btn.querySelector('.post-share-label');
+      var arrow = btn.querySelector('.ar');
+      if (label) label.textContent = 'share';
+      if (arrow) arrow.textContent = '↗︎';
+      btn.setAttribute('aria-label', 'share this postcard');
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var meta = {
+          title: btn.getAttribute('data-share-title') || document.title,
+          text: btn.getAttribute('data-share-text') || '',
+          url: btn.getAttribute('data-share-url') || location.href
+        };
+        function share(file) {
+          var payload = { title: meta.title, text: meta.text, url: meta.url };
+          if (file && navigator.canShare && navigator.canShare({ files: [file] })) payload.files = [file];
+          navigator.share(payload).catch(function (err) {
+            if (err && err.name === 'AbortError') return;   /* user dismissed the sheet */
+            window.location.href = imgUrl;                  /* last resort → download */
+          });
+        }
+        if (fileCache) share(fileCache);
+        else share(null);   /* png not ready → share the link now, keep the gesture alive */
+      });
+    });
+  }
+
   /* ── command palette (press / or ⌘K) ────────────────────── */
   function initCommandPalette() {
     var P = location.pathname.indexOf('/posts/') > -1 ? '../' : '';
@@ -526,6 +588,7 @@
     initNav();
     initBackToTop();
     initCommandPalette();
+    initShare();
     wireAnchors();
     initCardFx();
     initMagnetic();
