@@ -368,8 +368,9 @@
 
   function runBoot(done) {
     var boot = document.getElementById('boot');
+    var force = document.documentElement.classList.contains('boot-force'); /* ?boot preview */
     var skip = document.documentElement.classList.contains('boot-skip');
-    if (!boot || skip || reduced) {
+    if (!boot || (!force && (skip || reduced))) {
       if (boot) boot.style.display = 'none';
       done();
       return;
