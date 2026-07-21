@@ -356,63 +356,66 @@
     window.dispatchEvent(new Event('hero:reveal'));
   }
 
-  /* ── preloader ───────────────────────────────────────────── */
-  var STATUS = ['initialising runtime', 'loading modules', 'compiling geometry', 'mounting interface', 'all systems go'];
-  function runPreloader(done) {
-    var pl = document.getElementById('preloader');
-    if (!pl) { done(); return; }
-    var seen = false;
-    try { seen = sessionStorage.getItem('booted') === '1'; } catch (e) {}
-    if (seen) {
-      pl.style.display = 'none';
-      document.querySelectorAll('.pl-curtain').forEach(function (c) { c.style.display = 'none'; });
+  /* ── boot / preloader ────────────────────────────────────────
+     The visible intro is 100% CSS (see .boot in styles.css): the brand +
+     tag fade in and the hairline fills, all on the compositor thread, so
+     it can't be janked by anything JS does on the main thread. This
+     coordinator does no per-frame work — it just waits for the CSS fill to
+     finish, primes the page (build ScrollTriggers, pin hero, compile the
+     3D shaders) *behind* the still-opaque overlay, and once the hero has
+     actually painted a frame, adds .boot--out for one clean slide-away. */
+  function nowMs() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+
+  function runBoot(done) {
+    var boot = document.getElementById('boot');
+    var skip = document.documentElement.classList.contains('boot-skip');
+    if (!boot || skip || reduced) {
+      if (boot) boot.style.display = 'none';
       done();
       return;
     }
-    try { sessionStorage.setItem('booted', '1'); } catch (e) {}
-    if (reduced) { gsap.set(pl, { autoAlpha: 0, display: 'none' }); done(); return; }
     if (lenis) lenis.stop();
-    var countEl = pl.querySelector('.pl-num');
-    var statusEl = pl.querySelector('.pl-status b');
-    var barEl = pl.querySelector('.pl-bar i');
-    var counter = { v: 0 };
-    var revealed = false;
+
     var finished = false;
-    function reveal() {
-      if (revealed) return;
-      revealed = true;
-      if (lenis) lenis.start();
-      done();
-    }
     function finish() {
-      reveal();
       if (finished) return;
       finished = true;
-      pl.style.display = 'none';
-      document.querySelectorAll('.pl-curtain').forEach(function (c) { c.style.display = 'none'; });
-      if (ScrollTrigger) ScrollTrigger.refresh();
+      boot.style.display = 'none';
+      if (lenis) lenis.start();
     }
-    setTimeout(finish, 3200); /* wall-clock safety if rAF throttled */
 
-    var tl = gsap.timeline({
-      onComplete: function () {
-        var curtains = document.querySelectorAll('.pl-curtain');
-        var out = gsap.timeline({ onComplete: finish });
-        out.to(pl, { yPercent: -100, duration: 0.7, ease: 'expo.inOut' }, 0);
-        if (curtains.length) out.fromTo(curtains, { yPercent: 100 }, { yPercent: -100, duration: 0.85, ease: 'expo.inOut', stagger: 0.04 }, 0);
-        reveal(); /* start hero animation as soon as the curtains begin sliding away */
+    var exited = false;
+    function exit() {
+      if (exited) return;
+      exited = true;
+
+      /* prime everything while the overlay is still fully opaque and static */
+      done();
+
+      function slideAway() {
+        boot.classList.add('boot--out');
+        boot.addEventListener('transitionend', function (e) {
+          if (e.propertyName === 'transform') finish();
+        }, { once: true });
+        setTimeout(finish, 1200); /* safety if transitionend is missed */
       }
-    });
-    tl.to(counter, {
-      v: 100, duration: 0.6, ease: 'power2.inOut',
-      onUpdate: function () {
-        var n = Math.round(counter.v);
-        if (countEl) countEl.textContent = ('00' + n).slice(-3);
-        if (barEl) barEl.style.width = n + '%';
-        var idx = Math.min(STATUS.length - 1, Math.floor(n / (100 / STATUS.length)));
-        if (statusEl && statusEl.textContent !== STATUS[idx]) statusEl.textContent = STATUS[idx];
-      }
-    });
+
+      /* wait until the hero has actually painted a frame so the slide never
+         coincides with a shader compile — polled on wall-clock (not rAF) so a
+         backgrounded/throttled tab can never leave the overlay stuck. */
+      var hasHero = !!document.getElementById('hero-canvas');
+      var t0 = nowMs();
+      (function waitReady() {
+        if (!hasHero || window.__heroReady || (nowMs() - t0) > 600) slideAway();
+        else setTimeout(waitReady, 32);
+      })();
+    }
+
+    /* the CSS fill visually completes at ~1.2s (0.15s delay + 1.05s); trigger
+       the exit then. these timers are wall-clock, so a busy main thread can't
+       stall the intro. */
+    setTimeout(exit, 1250);
+    setTimeout(exit, 4000); /* hard safety */
   }
 
   /* ── postcard share (Web Share API, file + link) ─────────── */
@@ -595,7 +598,7 @@
     initProgress();
     initYear();
 
-    runPreloader(function () {
+    runBoot(function () {
       heroIntro();
       initHeroScroll();
       initManifesto();

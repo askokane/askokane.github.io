@@ -195,65 +195,76 @@ body::after {
 .nav-progress i { display: block; height: 100%; width: 0; background: var(--bright); }
 
 /* ────────────────────────────────────────────────────────────
-   preloader
+   boot / preloader
+   pure-CSS + compositor-only (transform/opacity) so the whole intro
+   stays glass-smooth even while three.js compiles shaders on the main
+   thread. JS only toggles .boot--out once the page is primed.
    ──────────────────────────────────────────────────────────── */
-#preloader {
+.boot {
   position: fixed;
   inset: 0;
   z-index: 200;
   background: var(--bg);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1.5rem, 5vw, 3.2rem);
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gut);
+  will-change: transform;
 }
-.pl-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.pl-top .mono-tag { color: var(--muted); }
-.pl-mid {
+.boot-inner {
+  width: min(360px, 76vw);
   display: flex;
-  align-items: flex-end;
-  gap: clamp(0.6rem, 2vw, 1.4rem);
+  flex-direction: column;
+  gap: 1.5rem;
 }
-.pl-count {
-  font-family: var(--display);
-  font-size: clamp(4.5rem, 22vw, 15rem);
-  line-height: 0.78;
-  color: var(--bright);
-  letter-spacing: -0.04em;
-  font-feature-settings: "tnum" 1;
+.boot-brand {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  color: var(--fg);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: boot-in 0.7s var(--ease) 0.05s forwards;
 }
-.pl-count .pct { font-size: 0.18em; color: var(--muted); vertical-align: super; margin-left: 0.4rem; }
-.pl-bottom { width: 100%; }
-.pl-status {
-  font-size: 0.74rem;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin-bottom: 0.9rem;
-  height: 1.1em;
-  overflow: hidden;
-}
-.pl-status b { color: var(--bright); font-weight: 400; }
-.pl-bar {
+.boot-track {
   width: 100%;
   height: 1px;
   background: var(--border);
-  position: relative;
   overflow: hidden;
 }
-.pl-bar i {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 0%;
+.boot-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
   background: var(--bright);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  animation: boot-fill 1.05s cubic-bezier(0.45, 0, 0.1, 1) 0.15s forwards;
 }
-/* curtains that slide away to reveal page */
-.pl-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 199;
-  background: var(--bg);
-  pointer-events: none;
+.boot-tag {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  opacity: 0;
+  animation: boot-in 0.7s var(--ease) 0.2s forwards;
+}
+/* JS adds this once the hero has painted → one clean compositor slide-away */
+.boot.boot--out {
+  transform: translateY(-101%);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+}
+@keyframes boot-in   { to { opacity: 1; transform: translateY(0); } }
+@keyframes boot-fill { to { transform: scaleX(1); } }
+
+/* returning within the session, or reduced motion → never shown */
+html.boot-skip .boot { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .boot-brand, .boot-tag { animation: none; opacity: 1; transform: none; }
+  .boot-fill { animation: none; transform: scaleX(1); }
 }
 
 /* ────────────────────────────────────────────────────────────

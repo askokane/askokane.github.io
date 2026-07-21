@@ -162,6 +162,10 @@ if (mount) {
   // ── per-frame ──
   let t = 0;
   function frame() {
+    /* stay idle until the preloader reveals — the hero is fully transparent
+       before intro anyway, so this just frees the main thread + GPU so the
+       boot counter and curtain reveal stay smooth */
+    if (!reduced && !revealed && intro === 0) return;
     if (!reduced) {
       t += 0.006;
       targetProgress = window.__heroProgress || 0;
@@ -197,6 +201,9 @@ if (mount) {
       displace(0, 0.6);
     }
     renderer.render(scene, camera);
+    /* signal that the first WebGL frame has compiled + painted, so the
+       preloader can wait and never reveal into a shader-compile hitch */
+    if (!window.__heroReady) window.__heroReady = true;
   }
   function tick() { requestAnimationFrame(tick); frame(); }
   tick();
