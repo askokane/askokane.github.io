@@ -39,9 +39,9 @@ anyways it has been an eventful july and i hope there is more to come. now, why 
 - [the da vinci code](https://www.imdb.com/title/tt0382625/)
 
 **music albums and songs**
-- [oblè reed - retrovision]([https://open.spotify.com/album/4H3AHyICa5QmPUx7UEm8Bk?si=yGX0OnvcQgSoJWl4Wk6iLQ](https://www.youtube.com/watch?v=iWswiOgFpXU))
+- [oblè reed - retrovision](https://www.youtube.com/watch?v=iWswiOgFpXU)
 - [the beatles - abbey road](https://open.spotify.com/album/0ETFjACtuP2ADo6LFhL6HN)
-- [oblè reed - lindenave!]([https://open.spotify.com/album/0AxvAObotd7vBdwBYq8ixj?si=8mJuErfkTemX-6rryLGDLA](https://www.youtube.com/watch?v=VoKD-RTQf3k&t=749s))
+- [oblè reed - lindenave!](https://www.youtube.com/watch?v=VoKD-RTQf3k&t=749s)
 - [guardin - without a way home](https://open.spotify.com/album/33zRB7cPF6qZ2U6gZcDviG?si=Hro7M_YmROeDWw-2kropwg)
 - [vikrammm, spartadot, senpai7 - nakaab](spotify:album:763ksL09x2XowUThk56i6H)
 
