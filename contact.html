@@ -42,9 +42,9 @@
 
   <!-- ── status strip ── -->
   <div class="status-strip" data-reveal="fade">
-    <span class="item">local time: <b data-clock>--:--:--</b> <span class="muted-unit">gst</span></span>
+    <span class="item">local time: <b data-clock>--:--:--</b> <span class="muted-unit">edt</span></span>
     <span class="item">probably: <b data-mood>thinking</b></span>
-    <span class="item">based in <b>blacksburg, va</b> (currently in <b>dubai, ae</b>)</span>
+    <span class="item">based in <b>blacksburg, va</span>
   </div>
 
   <!-- ── channels ── -->
@@ -170,7 +170,7 @@
   function tick() {
     var now = new Date();
     var parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
     }).formatToParts(now);
     var map = {};
     parts.forEach(function (p) { map[p.type] = p.value; });
