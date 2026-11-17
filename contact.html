@@ -36,16 +36,9 @@
 
   <header class="page-head">
     <div class="accent-bar" data-reveal="fade"></div>
-    <div class="sub" data-reveal="fade">// transmission — open channel</div>
+    <div class="sub" data-reveal="fade">places to find me</div>
     <h1 data-split="words" style="margin-top:1.1rem;">say hello.</h1>
   </header>
-
-  <!-- ── status strip ── -->
-  <div class="status-strip" data-reveal="fade">
-    <span class="item">local time: <b data-clock>--:--:--</b> <span class="muted-unit">edt</span></span>
-    <span class="item">probably: <b data-mood>thinking</b></span>
-    <span class="item">based in <b>blacksburg, va</span>
-  </div>
 
   <!-- ── channels ── -->
   <div class="channels">
@@ -54,7 +47,7 @@
       <span class="bg"></span>
       <span class="num">01</span>
       <span class="name">email</span>
-      <span class="handle" data-handle="atharvashashankk@vt.edu">atharvashashankk@vt.edu</span>
+      <span class="handle">atharvashashankk@vt.edu</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -62,7 +55,7 @@
       <span class="bg"></span>
       <span class="num">02</span>
       <span class="name">github</span>
-      <span class="handle" data-handle="github.com/askokane">github.com/askokane</span>
+      <span class="handle">github.com/askokane</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -70,7 +63,7 @@
       <span class="bg"></span>
       <span class="num">03</span>
       <span class="name">linkedin</span>
-      <span class="handle" data-handle="in/atharvakokane">in/atharvakokane</span>
+      <span class="handle">in/atharvakokane</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -78,7 +71,7 @@
       <span class="bg"></span>
       <span class="num">04</span>
       <span class="name">instagram</span>
-      <span class="handle" data-handle="@ath_arva_207">@ath_arva_207</span>
+      <span class="handle">@ath_arva_207</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -86,7 +79,7 @@
       <span class="bg"></span>
       <span class="num">05</span>
       <span class="name">spotify</span>
-      <span class="handle" data-handle="what i'm listening to">what i'm listening to</span>
+      <span class="handle">what i'm listening to</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -94,7 +87,7 @@
       <span class="bg"></span>
       <span class="num">06</span>
       <span class="name">goodreads</span>
-      <span class="handle" data-handle="what i'm reading">what i'm reading</span>
+      <span class="handle">what i'm reading</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -102,7 +95,7 @@
       <span class="bg"></span>
       <span class="num">07</span>
       <span class="name">letterboxd</span>
-      <span class="handle" data-handle="films i've watched">films i've watched</span>
+      <span class="handle">films i've watched</span>
       <span class="arrow">↗︎</span>
     </a>
 
@@ -120,96 +113,38 @@
       <div class="foot-col foot-id">
         <div class="accent-bar"></div>
         <p class="foot-tagline">cs sophomore building tools &amp; writing about ideas at virginia tech.</p>
-        <div class="foot-status"><span class="live"></span> from blacksburg, va</div>
+        <div class="foot-location">from blacksburg, va</div>
       </div>
       <div class="foot-col">
-        <div class="foot-h">// index</div>
+        <div class="foot-h">index</div>
         <a href="index.html">home</a>
         <a href="blog.html">writing</a>
         <a href="resume.html">resume</a>
         <a href="contact.html">contact</a>
       </div>
       <div class="foot-col">
-        <div class="foot-h">// channels</div>
+        <div class="foot-h">channels</div>
         <a href="mailto:atharvashashankk@vt.edu">email</a>
         <a href="https://www.linkedin.com/in/atharvakokane/" target="_blank" rel="noopener noreferrer">linkedin ↗︎</a>
         <a href="https://github.com/askokane" target="_blank" rel="noopener noreferrer">github ↗︎</a>
       </div>
       <div class="foot-col foot-actions">
-        <div class="foot-h">// nav</div>
+        <div class="foot-h">navigation</div>
         <button class="foot-top" type="button" data-top><span>back to top</span><span class="ar">↑︎</span></button>
       </div>
     </div>
   </div>
   <div class="foot-signoff">
-    <div class="foot-bignote">// you know what you want. you just need to</div>
+    <div class="foot-bignote">you know what you want. you just need to</div>
     <div class="foot-bigname" aria-hidden="true"><span>ask.</span></div>
   </div>
   <div class="wrap">
     <div class="foot-base">
       <span>© <span data-year></span> atharva kokane — all rights reserved</span>
-      <span>// rebuilt with gsap · three.js</span>
+      <span>animated with GSAP and Three.js</span>
     </div>
   </div>
 </footer>
 
-<script>
-(function () {
-  /* live local clock + time-of-day status, blacksburg va (america/new_york) */
-  var clockEl = document.querySelector('[data-clock]');
-  var moodEl = document.querySelector('[data-mood]');
-  var MOODS = [
-    [0, 6,  'asleep'],
-    [6, 9,  'making coffee'],
-    [9, 12, 'in class'],
-    [12, 14, 'eating lunch'],
-    [14, 18, 'building something'],
-    [18, 22, 'debugging / writing'],
-    [22, 24, 'winding down']
-  ];
-  function tick() {
-    var now = new Date();
-    var parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-    }).formatToParts(now);
-    var map = {};
-    parts.forEach(function (p) { map[p.type] = p.value; });
-    if (clockEl) clockEl.textContent = map.hour + ':' + map.minute + ':' + map.second;
-    if (moodEl) {
-      var hour = parseInt(map.hour, 10);
-      var mood = MOODS.find(function (m) { return hour >= m[0] && hour < m[1]; });
-      moodEl.textContent = mood ? mood[2] : 'thinking';
-    }
-  }
-  tick();
-  setInterval(tick, 1000);
-
-  /* handle scramble-in on hover (decryption feel) */
-  var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@./_-#%&';
-  function scramble(el, finalText) {
-    var start = performance.now(), dur = 480;
-    function frame(now) {
-      var p = Math.min(1, (now - start) / dur);
-      var reveal = Math.floor(p * finalText.length);
-      var out = '';
-      for (var i = 0; i < finalText.length; i++) {
-        var c = finalText[i];
-        if (i < reveal || c === ' ' || c === "'") out += c;
-        else out += CHARS[Math.floor(Math.random() * CHARS.length)];
-      }
-      el.textContent = out;
-      if (p < 1) requestAnimationFrame(frame);
-      else el.textContent = finalText;
-    }
-    requestAnimationFrame(frame);
-  }
-  document.querySelectorAll('.channel').forEach(function (ch) {
-    var handle = ch.querySelector('.handle');
-    if (!handle) return;
-    var final = handle.getAttribute('data-handle') || handle.textContent;
-    ch.addEventListener('pointerenter', function () { scramble(handle, final); });
-  });
-})();
-</script>
 </body>
 </html>
